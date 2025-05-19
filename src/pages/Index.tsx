@@ -1,12 +1,48 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect } from 'react';
+import Hero from '@/components/Hero';
+import Projects from '@/components/Projects';
+import Skills from '@/components/Skills';
+import About from '@/components/About';
+import SideProjects from '@/components/SideProjects';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  // Handle scroll-to-section navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const { hash } = window.location;
+      
+      if (hash) {
+        const section = document.querySelector(hash);
+        if (section) {
+          // Give time for smooth scroll to initialize
+          setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    };
+    
+    // Initial check for hash in URL
+    handleHashChange();
+    
+    // Add event listener for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="overflow-hidden">
+      <Hero />
+      <Projects />
+      <Skills />
+      <About />
+      <SideProjects />
+      <Footer />
     </div>
   );
 };
