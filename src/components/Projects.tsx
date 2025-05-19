@@ -1,4 +1,3 @@
-
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -72,7 +71,7 @@ const Projects = () => {
     const projectCards = gsap.utils.toArray('.project-card');
     
     projectCards.forEach((card, index) => {
-      gsap.fromTo(card,
+      gsap.fromTo(card as Element,
         { 
           x: index % 2 === 0 ? -100 : 100, 
           opacity: 0,
@@ -83,7 +82,7 @@ const Projects = () => {
           opacity: 1,
           rotateY: 0,
           scrollTrigger: {
-            trigger: card,
+            trigger: card as Element,
             start: 'top bottom-=100',
             end: 'center center',
             scrub: 1,
@@ -93,18 +92,21 @@ const Projects = () => {
     });
     
     // Parallax background effect
-    gsap.fromTo(sectionRef.current.querySelector('.bg-layer'),
-      { y: '-10%' },
-      {
-        y: '10%',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
+    const bgLayer = sectionRef.current.querySelector('.bg-layer');
+    if (bgLayer) {
+      gsap.fromTo(bgLayer,
+        { y: '-10%' },
+        {
+          y: '10%',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          }
         }
-      }
-    );
+      );
+    }
   }, []);
   
   return (
@@ -146,7 +148,6 @@ const Projects = () => {
               viewport={{ once: true, margin: "-100px" }}
             >
               <div className="relative h-64 md:h-80 overflow-hidden">
-                {/* <!-- Add project thumbnails or videos here. Can embed YouTube or MP4 --> */}
                 <img
                   src={project.image}
                   alt={project.title}

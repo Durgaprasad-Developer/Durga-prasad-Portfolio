@@ -129,18 +129,18 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
-          <h2 className="text-indian-gold text-2xl md:text-3xl mb-4 font-light">Welcome to the Kingdom of</h2>
+          <h2 className="text-indian-gold text-xl md:text-3xl mb-4 font-light">Welcome to the Kingdom of</h2>
           
           <h1 
             ref={headingRef}
-            className="text-5xl md:text-7xl lg:text-8xl font-prata mb-8 text-white"
+            className="text-4xl md:text-7xl lg:text-8xl font-prata mb-6 md:mb-8 text-white"
           >
             Ancient <span className="text-indian-gold">Indian</span> Kings
           </h1>
           
           <p 
             ref={subtitleRef}
-            className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-light opacity-90"
+            className="text-lg md:text-2xl mb-8 md:mb-12 max-w-3xl mx-auto font-light opacity-90"
           >
             Discover the legendary tales of valor, wisdom, and glory from the Mahabharata era
           </p>
@@ -150,18 +150,12 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
           >
-            <a href="#projects" className="hover-trigger hover-link text-indian-gold text-lg border border-indian-gold px-8 py-3 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue">
+            <a href="#projects" className="hover-trigger hover-link text-indian-gold text-base md:text-lg border border-indian-gold px-6 md:px-8 py-2 md:py-3 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue">
               Explore Journey
             </a>
           </motion.div>
         </motion.div>
       </div>
-      
-      {/* Audio player - hidden */}
-      <audio loop id="bgMusic" style={{ display: 'none' }}>
-        {/* <!-- Replace with traditional Indian music (looping .mp3) --> */}
-        <source src="" type="audio/mpeg" />
-      </audio>
       
       {/* Scroll indicator */}
       <div className="scroll-indicator">
