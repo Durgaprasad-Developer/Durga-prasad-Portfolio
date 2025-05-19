@@ -3,7 +3,6 @@ import { useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Progress } from "@/components/ui/progress";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,24 +89,41 @@ const Skills = () => {
           }
         }
       );
-    });
-    
-    // Parallax background effect
-    const bgPattern = sectionRef.current.querySelector('.bg-pattern');
-    if (bgPattern) {
-      gsap.fromTo(bgPattern,
-        { y: '-20%' },
+      
+      // Animate skill progress bar
+      const progressBar = skill.querySelector('.skill-progress');
+      const level = parseInt(progressBar?.getAttribute('data-level') || '0');
+      
+      gsap.fromTo(progressBar,
+        { width: '0%' },
         {
-          y: '20%',
+          width: `${level}%`,
+          duration: 1.5,
+          ease: 'power3.inOut',
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
+            trigger: skill,
+            start: 'top bottom-=100',
+            end: 'top center',
+            scrub: false,
+            toggleActions: 'play none none reverse',
           }
         }
       );
-    }
+    });
+    
+    // Parallax background effect
+    gsap.fromTo(sectionRef.current.querySelector('.bg-pattern'),
+      { y: '-20%' },
+      {
+        y: '20%',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      }
+    );
   }, []);
   
   return (
@@ -147,8 +163,8 @@ const Skills = () => {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-4`}>
-                <div className={`relative ${index % 2 === 0 ? 'md:mr-6' : 'md:ml-6'} mb-4 md:mb-0`}>
+              <div className={`flex items-center mb-4 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                <div className={`relative ${index % 2 === 0 ? 'mr-6' : 'ml-6'}`}>
                   {/* <!-- Replace icons with your dev skillset icons (SVG or PNG) --> */}
                   <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-indian-gold/10 p-4 flex items-center justify-center animate-glow">
                     <img 
@@ -159,11 +175,11 @@ const Skills = () => {
                   </div>
                 </div>
                 
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'} text-center`}>
+                <div className={`flex-1 ${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{skill.name}</h3>
                   <p className="text-white/70 mb-4">{skill.description}</p>
-                  <div className="w-full h-2">
-                    <Progress value={skill.level} className="h-2" />
+                  <div className="skill-bar w-full">
+                    <div className="skill-progress" data-level={skill.level}></div>
                   </div>
                   <div className="flex justify-between mt-1">
                     <span className="text-xs text-white/50">Beginner</span>
