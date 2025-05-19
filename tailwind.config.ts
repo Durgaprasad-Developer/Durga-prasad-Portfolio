@@ -63,15 +63,15 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Adding our theme colors
+				// Replacing the Indian theme colors with B&W theme
 				indian: {
-					'gold': '#D4AF37',
-					'maroon': '#800000',
-					'saffron': '#FF9933',
-					'royal-blue': '#0F1456',
-					'deep-red': '#9B2335',
-					'rich-purple': '#3C1053',
-					'sandstone': '#F1E2BE',
+					'gold': '#FFFFFF', // White (was gold)
+					'maroon': '#000000', // Black (was maroon)
+					'saffron': '#E0E0E0', // Light gray (was saffron)
+					'royal-blue': '#121212', // Dark gray almost black (was royal blue)
+					'deep-red': '#333333', // Dark gray (was deep red)
+					'rich-purple': '#555555', // Medium gray (was rich purple)
+					'sandstone': '#F5F5F5', // Off-white (was sandstone)
 				},
 			},
 			fontFamily: {
@@ -109,8 +109,8 @@ export default {
 					'50%': { transform: 'translateY(-10px)' },
 				},
 				'glow': {
-					'0%, 100%': { filter: 'drop-shadow(0 0 2px rgba(212, 175, 55, 0.5))' },
-					'50%': { filter: 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.8))' },
+					'0%, 100%': { filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))' },
+					'50%': { filter: 'drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))' },
 				},
 			},
 			animation: {

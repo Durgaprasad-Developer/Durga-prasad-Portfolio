@@ -14,7 +14,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-800 p-4">
       <motion.div 
         className="text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -22,9 +22,9 @@ const NotFound = () => {
         transition={{ duration: 0.6 }}
       >
         <motion.h1 
-          className="text-6xl md:text-8xl font-prata mb-6 text-indian-gold"
+          className="text-6xl md:text-8xl font-prata mb-6 text-white"
           animate={{ 
-            textShadow: ["0 0 5px rgba(212, 175, 55, 0.3)", "0 0 20px rgba(212, 175, 55, 0.6)", "0 0 5px rgba(212, 175, 55, 0.3)"]
+            textShadow: ["0 0 5px rgba(255, 255, 255, 0.3)", "0 0 20px rgba(255, 255, 255, 0.6)", "0 0 5px rgba(255, 255, 255, 0.3)"]
           }}
           transition={{ 
             duration: 2, 
@@ -44,7 +44,7 @@ const NotFound = () => {
         >
           <a 
             href="/" 
-            className="text-indian-gold border-2 border-indian-gold hover:bg-indian-gold hover:text-indian-royal-blue transition-colors duration-300 font-semibold py-3 px-8 rounded-full inline-block"
+            className="text-white border-2 border-white hover:bg-white hover:text-black transition-colors duration-300 font-semibold py-3 px-8 rounded-full inline-block"
           >
             Return to the Kingdom
           </a>

@@ -9,10 +9,9 @@ export function useSmoothScroll() {
     const lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      // Remove unsupported options from Lenis type
-      smoothWheel: true,
+      // Only use properties that are supported by the Lenis type
       wheelMultiplier: 1,
-      smoothTouch: false,
+      smoothWheel: true,
       touchMultiplier: 2,
     });
 
