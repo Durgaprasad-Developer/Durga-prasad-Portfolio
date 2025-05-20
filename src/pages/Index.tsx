@@ -24,8 +24,8 @@ const Index = () => {
       if (hash) {
         const section = document.querySelector(hash);
         if (section) {
-          // Use Lenis to scroll to section
-          lenis.scrollTo(section);
+          // Convert Element to HTMLElement before passing to lenis.scrollTo
+          lenis.scrollTo(section as HTMLElement);
         }
       }
     };
