@@ -44,12 +44,12 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     >
       <div className="preloader__content">
         <motion.h1
-          className="text-4xl md:text-5xl font-prata mb-2 text-white"
+          className="text-5xl md:text-6xl font-prata mb-2 text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Durga Prasad <span className="text-indian-gold">Portfolio</span>
+          <span className="text-indian-gold">Durga Prasad</span>
         </motion.h1>
         
         <motion.p
@@ -58,7 +58,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Inspired by Mahabharata
+          Portfolio
         </motion.p>
         
         <div className="preloader__progress">
