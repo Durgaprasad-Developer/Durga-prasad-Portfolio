@@ -3,7 +3,6 @@ import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +11,6 @@ const Hero = () => {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     // Initialize GSAP animations
@@ -21,7 +19,6 @@ const Hero = () => {
     const heading = headingRef.current;
     const image = imageRef.current;
     const name = nameRef.current;
-    const button = buttonRef.current;
     
     // Parallax effect on hero image
     if (image) {
@@ -59,20 +56,6 @@ const Hero = () => {
           scrub: 1,
         }
       });
-    }
-    
-    // Animate button
-    if (button) {
-      gsap.fromTo(button,
-        { y: 30, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          duration: 1.2,
-          ease: 'power2.out',
-          delay: 1.0
-        }
-      );
     }
     
     // Animate big name
@@ -141,34 +124,28 @@ const Hero = () => {
       </div>
       
       {/* Content container */}
-      <div className="container mx-auto px-4 z-20 relative flex flex-col items-center justify-end h-screen pb-32">
+      <div className="container mx-auto px-4 z-20 relative">
         <motion.div 
-          className="text-center"
+          className="max-w-5xl mx-auto text-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
           <h1 
             ref={headingRef}
-            className="text-8xl md:text-9xl lg:text-[10rem] font-prata mb-4 text-white font-extrabold tracking-tight"
-            style={{ textShadow: "0 0 20px rgba(0,0,0,0.5)" }}
+            className="text-6xl md:text-8xl lg:text-9xl font-prata mb-8 text-white text-right mr-8"
           >
-            <span className="text-indian-gold">DURGA</span> PRASAD
+            <span className="text-indian-gold font-bold">Durga</span> Prasad
           </h1>
           
           <motion.div
-            ref={buttonRef}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
-            className="mt-8"
+            className="text-right mr-8"
           >
-            <a 
-              href="#projects" 
-              className="hover-trigger inline-block bg-indian-gold text-indian-royal-blue text-xl font-bold px-10 py-4 rounded-full transition-all duration-300 hover:bg-white hover:scale-105 shadow-lg hover:shadow-xl"
-              style={{ textShadow: "none" }}
-            >
-              BEGIN THE JOURNEY
+            <a href="#projects" className="hover-trigger hover-link text-indian-gold text-lg border border-indian-gold px-8 py-3 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue">
+              Begin The Journey
             </a>
           </motion.div>
         </motion.div>
