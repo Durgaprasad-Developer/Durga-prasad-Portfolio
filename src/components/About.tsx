@@ -1,4 +1,3 @@
-
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -6,199 +5,120 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface TimelineEvent {
-  year: string;
-  title: string;
-  description: string;
-  image: string;
-}
-
-const timelineEvents: TimelineEvent[] = [
-  {
-    year: "2018",
-    title: "Started Coding",
-    description: "Began my journey into the world of programming, focusing on web development with HTML, CSS, and JavaScript.",
-    image: "/placeholder.svg"
-  },
-  {
-    year: "2019",
-    title: "First Hackathon",
-    description: "Participated in my first hackathon and won 3rd place with an innovative solution for local businesses.",
-    image: "/placeholder.svg"
-  },
-  {
-    year: "2020",
-    title: "Built AI Avatars",
-    description: "Developed an AI-powered avatar generation platform that became popular among content creators.",
-    image: "/placeholder.svg"
-  },
-  {
-    year: "2022",
-    title: "Freelancing",
-    description: "Started my own freelance business, working with clients around the world on various web and mobile applications.",
-    image: "/placeholder.svg"
-  }
-];
-
 const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!sectionRef.current || !timelineRef.current || !headingRef.current) return;
+    if (!sectionRef.current || !contentRef.current || !imageRef.current) return;
     
-    // Animate heading
-    gsap.fromTo(headingRef.current,
-      { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: 'top bottom-=100',
-          end: 'bottom bottom-=200',
-          scrub: 1
-        }
-      }
-    );
+    // Create a timeline for the content animation
+    const contentElements = contentRef.current.querySelectorAll('h2, p, ul li');
     
-    // Animate timeline events
-    const timelineEvents = gsap.utils.toArray('.timeline-event');
-    
-    timelineEvents.forEach((event, index) => {
-      // Stagger the animations
-      gsap.fromTo(event,
-        { 
-          y: 100, 
-          opacity: 0 
-        },
+    contentElements.forEach((element, index) => {
+      gsap.fromTo(element,
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
+          delay: index * 0.1,
           scrollTrigger: {
-            trigger: event,
-            start: 'top bottom-=50',
-            end: 'center center',
-            scrub: 1
+            trigger: element,
+            start: 'top bottom-=100',
+            toggleActions: 'play none none reverse'
           }
         }
       );
     });
     
-    // Animate the timeline line
-    gsap.fromTo('.timeline-line',
-      { height: 0 },
+    // Image reveal animation
+    gsap.fromTo(imageRef.current,
+      { 
+        clipPath: 'inset(100% 0 0 0)',
+        y: 100
+      },
       {
-        height: '100%',
+        clipPath: 'inset(0% 0 0 0)',
+        y: 0,
+        duration: 1.2,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: timelineRef.current,
-          start: 'top center',
-          end: 'bottom center',
-          scrub: 1
+          trigger: imageRef.current,
+          start: 'top bottom-=50',
+          toggleActions: 'play none none reverse'
         }
       }
     );
     
-    // Parallax background effect
-    gsap.fromTo(sectionRef.current.querySelector('.bg-overlay'),
-      { y: '-10%' },
-      {
-        y: '10%',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
-        }
+    // Background parallax effect
+    if (sectionRef.current) {
+      const bgLayer = sectionRef.current.querySelector('.bg-layer');
+      if (bgLayer) {
+        gsap.fromTo(bgLayer,
+          { y: '-20%' },
+          {
+            y: '20%',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            }
+          }
+        );
       }
-    );
+    }
   }, []);
   
   return (
     <section 
-      id="about" 
+      id="about"
       ref={sectionRef} 
-      className="section bg-gradient-to-b from-indian-maroon to-indian-royal-blue relative py-20"
+      className="section bg-gradient-to-b from-indian-rich-purple to-indian-royal-blue relative py-20"
     >
-      {/* Background overlay with Indian motifs */}
-      <div className="absolute inset-0 opacity-5 bg-overlay pointer-events-none">
-        {/* <!-- Add timeline image here, stylized in ancient Indian background --> */}
+      {/* Background decorative layer */}
+      <div className="absolute inset-0 opacity-10 bg-layer pointer-events-none">
+        {/* Replace background with ancient Indian patterns */}
         <div className="absolute inset-0" style={{ 
           backgroundImage: "url('/placeholder.svg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
+          backgroundRepeat: 'no-repeat'
         }}></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <h2 
-          ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-prata mb-20 text-center text-white"
-        >
-          The <span className="text-indian-gold">Journey</span>
-        </h2>
-        
-        <div 
-          ref={timelineRef}
-          className="max-w-5xl mx-auto relative"
-        >
-          {/* Timeline center line */}
-          <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 bg-indian-gold/50 top-0 bottom-0 z-0"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Content */}
+          <div ref={contentRef} className="text-white">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-prata mb-6 text-indian-gold">
+              Our <span className="text-white">Story</span>
+            </h2>
+            <p className="text-lg mb-6 opacity-80">
+              We are a team of historians and tech enthusiasts dedicated to bringing the rich history of ancient Indian kings to life through immersive digital experiences.
+            </p>
+            <p className="text-lg mb-6 opacity-80">
+              Our mission is to educate and inspire future generations by showcasing the valor, wisdom, and cultural achievements of these legendary figures.
+            </p>
+            <ul className="list-disc pl-5 opacity-80">
+              <li>Interactive historical timelines</li>
+              <li>3D models of ancient monuments</li>
+              <li>Augmented reality experiences</li>
+            </ul>
+          </div>
           
-          {timelineEvents.map((event, index) => (
-            <motion.div
-              key={event.title}
-              className="timeline-event relative z-10 mb-32"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full bg-indian-gold z-20"></div>
-              
-              {/* Content container */}
-              <div className={`flex flex-col md:flex-row items-center ${
-                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}>
-                {/* Year marker */}
-                <div className={`mb-4 md:mb-0 ${
-                  index % 2 === 0 ? 'md:mr-8 md:text-right' : 'md:ml-8 md:text-left'
-                } md:w-1/4`}>
-                  <div className="bg-indian-gold text-indian-royal-blue text-xl md:text-2xl font-bold py-2 px-6 inline-block rounded-full">
-                    {event.year}
-                  </div>
-                </div>
-                
-                {/* Content */}
-                <div className={`bg-white/5 backdrop-blur-sm rounded-xl p-6 md:p-8 ${
-                  index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'
-                } md:w-3/4`}>
-                  <div className="flex flex-col md:flex-row items-start">
-                    {/* Image */}
-                    <div className="mb-6 md:mb-0 md:mr-6 md:w-1/3">
-                      <div className="rounded-lg overflow-hidden">
-                        <img 
-                          src={event.image} 
-                          alt={event.title}
-                          className="w-full h-48 object-cover transform transition-transform duration-700 hover:scale-110"
-                        />
-                      </div>
-                    </div>
-                    
-                    {/* Text content */}
-                    <div className="md:w-2/3">
-                      <h3 className="text-2xl font-bold text-indian-gold mb-4">{event.title}</h3>
-                      <p className="text-white/80">{event.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {/* Image */}
+          <div ref={imageRef} className="relative overflow-hidden rounded-xl shadow-xl">
+            {/* Replace with an image of ancient Indian kings or artifacts */}
+            <img 
+              src="/placeholder.svg" 
+              alt="Ancient Indian Kings" 
+              className="w-full h-auto object-cover" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-indian-royal-blue/70 to-transparent"></div>
+          </div>
         </div>
       </div>
     </section>

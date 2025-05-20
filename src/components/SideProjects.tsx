@@ -1,92 +1,103 @@
-
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Project {
+interface SideProject {
   id: number;
   title: string;
   description: string;
   image: string;
-  link: string;
 }
 
-const projects: Project[] = [
+const sideProjects: SideProject[] = [
   {
     id: 1,
-    title: "AI Avatar Generator",
-    description: "Create personalized AI avatars with ancient Indian warrior styles and attributes.",
-    image: "/placeholder.svg",
-    link: "#"
+    title: "Ancient Weapons Collection",
+    description: "Curated traditional Indian warfare artifacts and digitized them for historical preservation.",
+    image: "/placeholder.svg"
   },
   {
     id: 2,
-    title: "Scaler Secret Talks",
-    description: "A podcast series exploring the ancient wisdom and strategies of Indian kings.",
-    image: "/placeholder.svg",
-    link: "#"
+    title: "Leadership Academy",
+    description: "Founded a program teaching leadership principles derived from ancient Indian kings and warriors.",
+    image: "/placeholder.svg"
   },
   {
     id: 3,
-    title: "Stock Market Bot",
-    description: "Automated trading system inspired by ancient Indian mathematical principles.",
-    image: "/placeholder.svg",
-    link: "#"
+    title: "Historical Fiction Novel",
+    description: "Authored a novel set in ancient India exploring the lives of royal warriors.",
+    image: "/placeholder.svg"
   }
 ];
 
 const SideProjects = () => {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeProject, setActiveProject] = useState<SideProject | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!sectionRef.current || !headingRef.current || !cardsRef.current) return;
+    if (!sectionRef.current || !headingRef.current || !projectsRef.current) return;
     
-    // Animate heading
+    // Animate the heading
     gsap.fromTo(headingRef.current,
-      { y: 100, opacity: 0 },
+      { opacity: 0, y: 50 },
       {
-        y: 0,
         opacity: 1,
+        y: 0,
+        duration: 0.8,
         scrollTrigger: {
           trigger: headingRef.current,
           start: 'top bottom-=100',
-          end: 'bottom bottom-=200',
-          scrub: 1
+          toggleActions: 'play none none reverse'
         }
       }
     );
     
-    // Animate project cards
-    const projectCards = gsap.utils.toArray('.project-item');
+    // Animate the projects
+    const projects = projectsRef.current.querySelectorAll('.side-project');
     
-    projectCards.forEach((card, index) => {
-      gsap.fromTo(card,
-        { 
-          y: 100, 
-          opacity: 0 
-        },
+    projects.forEach((project, index) => {
+      gsap.fromTo(project,
+        { opacity: 0, y: 50 },
         {
-          y: 0,
           opacity: 1,
-          stagger: 0.1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.2,
           scrollTrigger: {
-            trigger: card,
+            trigger: project,
             start: 'top bottom-=50',
-            end: 'top center',
-            scrub: 1
+            toggleActions: 'play none none reverse'
           }
         }
       );
     });
+    
+    // Background parallax effect
+    if (sectionRef.current) {
+      const bgLayer = sectionRef.current.querySelector('.bg-layer');
+      if (bgLayer) {
+        gsap.fromTo(bgLayer,
+          { y: '0%' },
+          {
+            y: '20%',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            }
+          }
+        );
+      }
+    }
   }, []);
   
-  const openModal = (project: Project) => {
+  const openModal = (project: SideProject) => {
     setActiveProject(project);
     document.body.style.overflow = 'hidden';
   };
@@ -121,13 +132,13 @@ const SideProjects = () => {
         </h2>
         
         <div 
-          ref={cardsRef}
+          ref={projectsRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
         >
-          {projects.map((project) => (
+          {sideProjects.map((project) => (
             <motion.div
               key={project.id}
-              className="project-item group"
+              className="side-project group"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}

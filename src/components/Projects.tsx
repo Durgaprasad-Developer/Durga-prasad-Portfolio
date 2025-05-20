@@ -49,6 +49,44 @@ const Projects = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
+  // Tilt effect function
+  const handleTilt = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    if (!projectRefs.current[index]) return;
+    
+    const card = projectRefs.current[index];
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const tiltX = (centerY - y) / 10;
+    const tiltY = (x - centerX) / 10;
+    
+    gsap.to(card, {
+      rotateX: tiltX,
+      rotateY: tiltY,
+      duration: 0.5,
+      ease: 'power2.out',
+      transformPerspective: 900,
+      transformStyle: 'preserve-3d'
+    });
+  };
+  
+  // Reset tilt
+  const resetTilt = (index: number) => {
+    if (!projectRefs.current[index]) return;
+    
+    gsap.to(projectRefs.current[index], {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.5,
+      ease: 'power2.out'
+    });
+  };
   
   useEffect(() => {
     if (!sectionRef.current || !timelineRef.current || !headingRef.current) return;
@@ -69,9 +107,9 @@ const Projects = () => {
     );
     
     // Timeline animation
-    const projectCards = gsap.utils.toArray('.project-card');
-    
-    projectCards.forEach((card, index) => {
+    projectRefs.current.forEach((card, index) => {
+      if (!card) return;
+      
       gsap.fromTo(card,
         { 
           x: index % 2 === 0 ? -100 : 100, 
@@ -93,18 +131,21 @@ const Projects = () => {
     });
     
     // Parallax background effect
-    gsap.fromTo(sectionRef.current.querySelector('.bg-layer'),
-      { y: '-10%' },
-      {
-        y: '10%',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
+    const bgLayer = sectionRef.current.querySelector('.bg-layer');
+    if (bgLayer) {
+      gsap.fromTo(bgLayer,
+        { y: '-10%' },
+        {
+          y: '10%',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          }
         }
-      }
-    );
+      );
+    }
   }, []);
   
   return (
@@ -132,39 +173,54 @@ const Projects = () => {
           Legendary <span className="text-indian-gold">Works</span>
         </h2>
         
-        <div ref={timelineRef} className="max-w-5xl mx-auto">
+        <div ref={timelineRef} className="max-w-5xl mx-auto relative">
+          {/* Timeline path */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indian-gold/30 transform -translate-x-1/2"></div>
+          
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
+              ref={el => projectRefs.current[index] = el}
               className={`project-card mb-24 md:mb-32 bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover-trigger ${
                 index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
               }`}
-              style={{ maxWidth: '90%', width: '600px' }}
+              style={{ 
+                maxWidth: '90%', 
+                width: '600px',
+                transformStyle: 'preserve-3d'
+              }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true, margin: "-100px" }}
+              onMouseMove={(e) => handleTilt(e, index)}
+              onMouseLeave={() => resetTilt(index)}
             >
-              <div className="relative h-64 md:h-80 overflow-hidden">
-                {/* <!-- Add project thumbnails or videos here. Can embed YouTube or MP4 --> */}
+              <div className="relative h-64 md:h-80 overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover object-center transform transition-transform duration-700 hover:scale-110"
+                  style={{ transform: 'translateZ(20px)' }}
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-indian-royal-blue/90 to-transparent"></div>
-                <div className="absolute top-4 right-4 bg-indian-gold text-indian-royal-blue font-bold py-1 px-4 rounded-full text-sm">
+                <div className="absolute top-4 right-4 bg-indian-gold text-indian-royal-blue font-bold py-1 px-4 rounded-full text-sm" style={{ transform: 'translateZ(40px)' }}>
                   {project.year}
                 </div>
               </div>
               
-              <div className="p-6 md:p-8">
+              <div className="p-6 md:p-8" style={{ transform: 'translateZ(30px)' }}>
                 <h3 className="text-2xl md:text-3xl font-prata mb-4 text-indian-gold">{project.title}</h3>
                 <p className="text-white/80 mb-6">{project.description}</p>
                 <button className="text-indian-gold border border-indian-gold px-6 py-2 rounded-full hover:bg-indian-gold hover:text-indian-royal-blue transition duration-300">
                   Explore
                 </button>
               </div>
+              
+              {/* Timeline dot */}
+              <div className={`hidden md:block absolute top-1/2 ${
+                index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'
+              } w-4 h-4 rounded-full bg-indian-gold transform -translate-y-1/2 mx-8`}></div>
             </motion.div>
           ))}
         </div>
