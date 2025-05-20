@@ -44,12 +44,12 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     >
       <div className="preloader__content">
         <motion.h1
-          className="text-5xl md:text-6xl font-prata mb-2 text-white"
+          className="text-4xl md:text-5xl font-prata mb-2 text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="text-indian-gold">Durga Prasad</span>
+          <span className="text-indian-gold font-bold">Durga Prasad</span>
         </motion.h1>
         
         <motion.p

@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Button } from './ui/button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,36 +125,38 @@ const Hero = () => {
       </div>
       
       {/* Content container */}
-      <div className="container mx-auto px-4 z-20 relative">
+      <div className="container mx-auto px-4 z-20 relative flex flex-col items-center justify-end h-full pb-24">
         <motion.div 
-          className="max-w-5xl mx-auto text-white"
+          className="text-white text-center mt-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
           <h1 
             ref={headingRef}
-            className="text-6xl md:text-8xl lg:text-9xl font-prata mb-8 text-white text-right mr-8"
+            className="text-5xl md:text-6xl lg:text-7xl font-prata mb-8 text-center"
           >
-            <span className="text-indian-gold font-bold">Durga</span> Prasad
+            <span className="text-indian-gold font-bold block">Durga</span> Prasad
           </h1>
           
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
-            className="text-right mr-8"
+            className="text-center"
           >
-            <a href="#projects" className="hover-trigger hover-link text-indian-gold text-lg border border-indian-gold px-8 py-3 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue">
+            <Button 
+              variant="outline"
+              className="hover-trigger hover-link text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
+            >
               Begin The Journey
-            </a>
+            </Button>
           </motion.div>
         </motion.div>
       </div>
       
       {/* Audio player - hidden */}
       <audio loop id="bgMusic" style={{ display: 'none' }}>
-        {/* <!-- Replace with traditional Indian music (looping .mp3) --> */}
         <source src="" type="audio/mpeg" />
       </audio>
       
