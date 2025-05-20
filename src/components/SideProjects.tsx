@@ -11,6 +11,7 @@ interface SideProject {
   title: string;
   description: string;
   image: string;
+  link: string; // Added link property to fix TypeScript error
 }
 
 const sideProjects: SideProject[] = [
@@ -18,19 +19,22 @@ const sideProjects: SideProject[] = [
     id: 1,
     title: "Ancient Weapons Collection",
     description: "Curated traditional Indian warfare artifacts and digitized them for historical preservation.",
-    image: "/placeholder.svg"
+    image: "/placeholder.svg",
+    link: "#" // Added default link
   },
   {
     id: 2,
     title: "Leadership Academy",
     description: "Founded a program teaching leadership principles derived from ancient Indian kings and warriors.",
-    image: "/placeholder.svg"
+    image: "/placeholder.svg",
+    link: "#" // Added default link
   },
   {
     id: 3,
     title: "Historical Fiction Novel",
     description: "Authored a novel set in ancient India exploring the lives of royal warriors.",
-    image: "/placeholder.svg"
+    image: "/placeholder.svg",
+    link: "#" // Added default link
   }
 ];
 
