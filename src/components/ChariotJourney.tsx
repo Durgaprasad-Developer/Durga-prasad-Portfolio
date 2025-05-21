@@ -46,18 +46,18 @@ const ChariotJourney = () => {
   return (
     <div 
       ref={sectionRef} 
-      className="fixed left-0 z-30 w-20 h-full pointer-events-none"
+      className="fixed left-0 right-0 z-30 w-full h-full pointer-events-none"
       style={{ top: 0 }} // Ensure it stays at the top
     >
       {/* SVG Path for vertical wave motion throughout the Projects section */}
       <svg 
         className="absolute inset-0 w-full h-full" 
-        viewBox="0 0 100 1000" 
+        viewBox="0 0 1000 1000" 
         preserveAspectRatio="none"
       >
         <path
           ref={pathRef}
-          d="M50,0 C30,200 70,400 30,600 S70,800 50,1000" // Vertical wave path
+          d="M500,0 C480,200 520,400 480,600 S520,800 500,1000" // Centered vertical wave path
           fill="none"
           stroke="rgba(255,255,255,0.1)"
           strokeWidth="2"

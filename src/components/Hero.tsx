@@ -87,9 +87,13 @@ const Hero = () => {
   
   // Function to handle smooth scrolling to projects section
   const handleScrollToProjects = () => {
+    console.log("Button clicked, trying to scroll to projects section");
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
+      console.log("Projects section found, scrolling");
       projectsSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log("Projects section not found");
     }
   };
   
