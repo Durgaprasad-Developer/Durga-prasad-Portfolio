@@ -71,7 +71,7 @@ const Index = () => {
   return (
     <AnimatePresence>
       <motion.div 
-        className="overflow-hidden"
+        className="overflow-hidden relative"
         initial="hidden"
         animate="visible"
         variants={pageTransition}

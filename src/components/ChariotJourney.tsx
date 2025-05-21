@@ -14,10 +14,10 @@ const ChariotJourney = () => {
   useEffect(() => {
     if (!sectionRef.current || !chariotRef.current || !pathRef.current) return;
     
-    // Create the animation
+    // Create the animation that follows the entire Legendary Works section
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: sectionRef.current,
+        trigger: "#projects", // Target the projects section
         start: "top bottom",
         end: "bottom top",
         scrub: 1,
@@ -46,18 +46,18 @@ const ChariotJourney = () => {
   return (
     <div 
       ref={sectionRef} 
-      id="journey"
-      className="relative h-full min-h-[400px] w-full overflow-hidden bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple"
+      className="fixed left-0 z-30 w-20 h-full pointer-events-none"
+      style={{ top: 0 }} // Ensure it stays at the top
     >
-      {/* SVG Path (hidden but used for motion) - Vertical wave path */}
+      {/* SVG Path for vertical wave motion throughout the Projects section */}
       <svg 
         className="absolute inset-0 w-full h-full" 
-        viewBox="0 0 300 1200" 
+        viewBox="0 0 100 1000" 
         preserveAspectRatio="none"
       >
         <path
           ref={pathRef}
-          d="M150,0 C100,200 200,400 100,600 S200,1000 150,1200"
+          d="M50,0 C30,200 70,400 30,600 S70,800 50,1000" // Vertical wave path
           fill="none"
           stroke="rgba(255,255,255,0.1)"
           strokeWidth="2"
@@ -67,11 +67,11 @@ const ChariotJourney = () => {
       {/* Chariot */}
       <div 
         ref={chariotRef}
-        className="absolute top-0 left-1/2 w-16 h-16 md:w-24 md:h-24"
+        className="absolute top-0 left-1/2 w-12 h-12 md:w-16 md:h-16"
         style={{ transform: 'translate(-50%, -50%)' }}
       >
         <div className="w-full h-full relative animate-glow">
-          {/* Chariot icon (using a simple crown as placeholder) */}
+          {/* Chariot icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full text-indian-gold">
             <path 
               fill="currentColor" 

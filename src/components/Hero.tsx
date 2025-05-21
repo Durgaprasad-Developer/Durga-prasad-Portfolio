@@ -85,6 +85,14 @@ const Hero = () => {
     };
   }, []);
   
+  // Function to handle smooth scrolling to projects section
+  const handleScrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
   return (
     <section ref={heroRef} id="hero" className="section bg-indian-royal-blue min-h-screen relative overflow-hidden">
       {/* Background gradient overlay */}
@@ -123,7 +131,7 @@ const Hero = () => {
         >
           <h1 
             ref={headingRef}
-            className="text-4xl md:text-5xl lg:text-6xl font-prata mb-8 text-center"
+            className="text-3xl md:text-4xl lg:text-5xl font-prata mb-8 text-center"
           >
             <span className="text-indian-gold font-bold">Durga</span> Prasad
           </h1>
@@ -137,7 +145,7 @@ const Hero = () => {
             <Button 
               variant="outline"
               className="hover-trigger hover-link text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={handleScrollToProjects}
             >
               Begin The Journey
             </Button>
