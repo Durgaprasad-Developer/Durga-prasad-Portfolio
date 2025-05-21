@@ -24,7 +24,7 @@ const Hero = () => {
     // Parallax effect on hero image
     if (image) {
       gsap.to(image, {
-        y: '25%',
+        y: '15%',
         scrollTrigger: {
           trigger: heroRef.current,
           start: 'top top',
@@ -37,7 +37,7 @@ const Hero = () => {
     // Animate heading
     if (heading) {
       gsap.fromTo(heading, 
-        { y: 100, opacity: 0 },
+        { y: 50, opacity: 0 },
         { 
           y: 0, 
           opacity: 1, 
@@ -46,17 +46,6 @@ const Hero = () => {
           delay: 0.5
         }
       );
-      
-      // Parallax scroll effect on heading
-      gsap.to(heading, {
-        y: '-25%',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        }
-      });
     }
     
     // Animate big name
@@ -97,7 +86,7 @@ const Hero = () => {
   }, []);
   
   return (
-    <section ref={heroRef} className="section bg-indian-royal-blue min-h-screen relative overflow-hidden">
+    <section ref={heroRef} id="hero" className="section bg-indian-royal-blue min-h-screen relative overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-indian-rich-purple/80 to-indian-royal-blue/90 z-0"></div>
       
@@ -124,19 +113,19 @@ const Hero = () => {
         />
       </div>
       
-      {/* Content container */}
-      <div className="container mx-auto px-4 z-20 relative flex flex-col items-center justify-end h-full pb-24">
+      {/* Content container - positioned at bottom */}
+      <div className="absolute inset-x-0 bottom-16 md:bottom-24 z-20 px-4">
         <motion.div 
-          className="text-white text-center mt-auto"
+          className="text-white text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
           <h1 
             ref={headingRef}
-            className="text-5xl md:text-6xl lg:text-7xl font-prata mb-8 text-center"
+            className="text-4xl md:text-5xl lg:text-6xl font-prata mb-8 text-center"
           >
-            <span className="text-indian-gold font-bold block">Durga</span> Prasad
+            <span className="text-indian-gold font-bold">Durga</span> Prasad
           </h1>
           
           <motion.div
@@ -148,6 +137,7 @@ const Hero = () => {
             <Button 
               variant="outline"
               className="hover-trigger hover-link text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Begin The Journey
             </Button>

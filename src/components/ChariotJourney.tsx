@@ -46,17 +46,18 @@ const ChariotJourney = () => {
   return (
     <div 
       ref={sectionRef} 
-      className="relative h-[200px] md:h-[300px] w-full overflow-hidden bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple"
+      id="journey"
+      className="relative h-full min-h-[400px] w-full overflow-hidden bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple"
     >
-      {/* SVG Path (hidden but used for motion) */}
+      {/* SVG Path (hidden but used for motion) - Vertical wave path */}
       <svg 
         className="absolute inset-0 w-full h-full" 
-        viewBox="0 0 1200 300" 
+        viewBox="0 0 300 1200" 
         preserveAspectRatio="none"
       >
         <path
           ref={pathRef}
-          d="M0,150 C300,50 600,250 900,100 S1200,150 1200,150"
+          d="M150,0 C100,200 200,400 100,600 S200,1000 150,1200"
           fill="none"
           stroke="rgba(255,255,255,0.1)"
           strokeWidth="2"
@@ -66,7 +67,7 @@ const ChariotJourney = () => {
       {/* Chariot */}
       <div 
         ref={chariotRef}
-        className="absolute top-0 left-0 w-16 h-16 md:w-24 md:h-24"
+        className="absolute top-0 left-1/2 w-16 h-16 md:w-24 md:h-24"
         style={{ transform: 'translate(-50%, -50%)' }}
       >
         <div className="w-full h-full relative animate-glow">
@@ -79,8 +80,8 @@ const ChariotJourney = () => {
           </svg>
         </div>
         
-        {/* Trail effect */}
-        <div className="absolute top-1/2 right-full w-20 h-[2px] bg-gradient-to-r from-transparent to-indian-gold"></div>
+        {/* Trail effect - vertical */}
+        <div className="absolute bottom-full left-1/2 h-20 w-[2px] bg-gradient-to-t from-transparent to-indian-gold"></div>
       </div>
     </div>
   );
