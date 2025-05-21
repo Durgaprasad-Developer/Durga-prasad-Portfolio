@@ -47,6 +47,7 @@ const Index = () => {
           setActiveSection(sectionId);
           
           // Only show chariot when in projects section
+          // This ensures the chariot is only visible during the projects section
           setShowChariot(sectionId === 'projects');
         }
       });
@@ -82,7 +83,8 @@ const Index = () => {
         variants={pageTransition}
       >
         <Hero />
-        {showChariot && <ChariotJourney />}
+        {/* The chariot will only be shown when the projects section is active */}
+        <ChariotJourney />
         <Projects />
         <Skills />
         <About />

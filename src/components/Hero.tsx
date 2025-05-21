@@ -87,13 +87,10 @@ const Hero = () => {
   
   // Function to handle smooth scrolling to projects section
   const handleScrollToProjects = () => {
-    console.log("Button clicked, trying to scroll to projects section");
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
-      console.log("Projects section found, scrolling");
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      console.log("Projects section not found");
+      // Use scrollIntoView with smooth behavior
+      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
   
@@ -148,10 +145,10 @@ const Hero = () => {
           >
             <Button 
               variant="outline"
-              className="hover-trigger hover-link text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
+              className="hover-trigger hover-link text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider shadow-lg"
               onClick={handleScrollToProjects}
             >
-              Begin The Journey
+              View My Portfolio
             </Button>
           </motion.div>
         </motion.div>
