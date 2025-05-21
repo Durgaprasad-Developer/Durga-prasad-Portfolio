@@ -14,7 +14,7 @@ const ChariotJourney = () => {
   useEffect(() => {
     if (!sectionRef.current || !chariotRef.current || !pathRef.current) return;
     
-    // Create the animation that follows only the projects section
+    // Create the animation that follows only the Legendary Works section and stops at Skills
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#projects", // Target only the projects section
@@ -24,43 +24,6 @@ const ChariotJourney = () => {
         toggleActions: "play none none reverse"
       }
     });
-    
-    // Calculate path points based on project cards positioning
-    const projectCards = document.querySelectorAll('.project-card');
-    let pathPoints = "";
-    
-    if (projectCards.length > 0) {
-      const projectsSection = document.getElementById('projects');
-      if (projectsSection) {
-        const sectionRect = projectsSection.getBoundingClientRect();
-        const sectionHeight = sectionRect.height;
-        
-        // Start at the section title
-        const startX = 500; // Middle of SVG viewBox
-        const startY = 100; // Near the top
-        pathPoints = `M${startX},${startY} `;
-        
-        // Create zigzag points through project cards
-        projectCards.forEach((card, index) => {
-          const rect = card.getBoundingClientRect();
-          const offsetY = rect.top - sectionRect.top + rect.height / 2;
-          const normalizedY = (offsetY / sectionHeight) * 1000; // Scale to SVG viewBox
-          
-          // Alternating left and right points for zigzag
-          const x = index % 2 === 0 ? 200 : 800;
-          pathPoints += `L${x},${normalizedY} `;
-        });
-        
-        // End point just before skills section
-        pathPoints += `L500,1000`;
-      }
-    } else {
-      // Fallback path if project cards aren't available
-      pathPoints = "M500,100 C300,300 700,500 300,700 C700,900 500,1000 500,1000";
-    }
-    
-    // Update the SVG path
-    pathRef.current.setAttribute("d", pathPoints);
     
     // Animate the chariot along the path
     tl.to(chariotRef.current, {
@@ -94,11 +57,10 @@ const ChariotJourney = () => {
       >
         <path
           ref={pathRef}
-          d="M500,100 C300,300 700,500 300,700 C700,900 500,1000 500,1000" // Initial zigzag path
+          d="M500,0 C400,100 600,200 400,300 C600,400 400,500 600,600 C400,700 600,800 500,1000" // Zigzag wave path
           fill="none"
           stroke="rgba(255,255,255,0.1)"
           strokeWidth="2"
-          strokeDasharray="5,5"
         />
       </svg>
       

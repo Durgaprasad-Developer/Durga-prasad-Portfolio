@@ -182,27 +182,20 @@ const Projects = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section title - Enhanced with more prominent styling */}
-        <div className="mb-16 text-center">
-          <h2 
-            ref={sectionTitleRef}
-            className="text-lg md:text-xl uppercase tracking-[0.2em] font-montserrat mb-4 text-center text-white/70"
-          >
-            Portfolio
-          </h2>
-          
-          <h2 
-            ref={headingRef}
-            className="text-4xl md:text-5xl lg:text-6xl font-prata mb-6 text-center text-white relative inline-block"
-          >
-            Legendary <span className="text-indian-gold">Works</span>
-            <div className="h-1 w-24 bg-indian-gold mx-auto mt-4"></div>
-          </h2>
-          
-          <p className="text-white/80 max-w-2xl mx-auto text-center text-lg">
-            Discover my professional portfolio showcasing innovative projects and creative solutions.
-          </p>
-        </div>
+        {/* Section title */}
+        <h2 
+          ref={sectionTitleRef}
+          className="text-2xl md:text-3xl font-prata mb-4 text-center text-white"
+        >
+          <span className="text-indian-gold">My</span> Journey
+        </h2>
+        
+        <h2 
+          ref={headingRef}
+          className="text-4xl md:text-5xl lg:text-6xl font-prata mb-20 text-center text-white"
+        >
+          Legendary <span className="text-indian-gold">Works</span>
+        </h2>
         
         <div ref={timelineRef} className="max-w-5xl mx-auto relative">
           {/* Timeline path */}
