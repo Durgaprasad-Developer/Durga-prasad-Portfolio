@@ -14,10 +14,10 @@ const ChariotJourney = () => {
   useEffect(() => {
     if (!sectionRef.current || !chariotRef.current || !pathRef.current) return;
     
-    // Create the animation that follows the entire Legendary Works section
+    // Create the animation that follows only the Legendary Works section and stops at Skills
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: "#projects", // Target the projects section
+        trigger: "#projects", // Target only the projects section
         start: "top bottom",
         end: "bottom top",
         scrub: 1,
@@ -47,9 +47,9 @@ const ChariotJourney = () => {
     <div 
       ref={sectionRef} 
       className="fixed left-0 right-0 z-30 w-full h-full pointer-events-none"
-      style={{ top: 0 }} // Ensure it stays at the top
+      style={{ top: 0 }} // Ensure it starts at the top
     >
-      {/* SVG Path for vertical wave motion throughout the Projects section */}
+      {/* SVG Path for zigzag motion throughout the Projects section */}
       <svg 
         className="absolute inset-0 w-full h-full" 
         viewBox="0 0 1000 1000" 
@@ -57,7 +57,7 @@ const ChariotJourney = () => {
       >
         <path
           ref={pathRef}
-          d="M500,0 C480,200 520,400 480,600 S520,800 500,1000" // Centered vertical wave path
+          d="M500,0 C400,100 600,200 400,300 C600,400 400,500 600,600 C400,700 600,800 500,1000" // Zigzag wave path
           fill="none"
           stroke="rgba(255,255,255,0.1)"
           strokeWidth="2"

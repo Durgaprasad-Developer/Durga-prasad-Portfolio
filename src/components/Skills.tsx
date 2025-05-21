@@ -49,10 +49,26 @@ const skills: Skill[] = [
 const Skills = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const sectionTitleRef = useRef<HTMLHeadingElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!sectionRef.current || !headingRef.current || !skillsRef.current) return;
+    if (!sectionRef.current || !headingRef.current || !skillsRef.current || !sectionTitleRef.current) return;
+    
+    // Animate section title
+    gsap.fromTo(sectionTitleRef.current,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: sectionTitleRef.current,
+          start: 'top bottom-=50',
+          end: 'bottom bottom-=100',
+          scrub: 1,
+        }
+      }
+    );
     
     // Animate heading
     gsap.fromTo(headingRef.current,
@@ -143,6 +159,14 @@ const Skills = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section title */}
+        <h2 
+          ref={sectionTitleRef}
+          className="text-2xl md:text-3xl font-prata mb-4 text-center text-white"
+        >
+          <span className="text-indian-gold">My</span> Expertise
+        </h2>
+        
         <h2 
           ref={headingRef}
           className="text-4xl md:text-5xl lg:text-6xl font-prata mb-20 text-center text-white"

@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const Index = () => {
   const lenis = useSmoothScroll();
   const [activeSection, setActiveSection] = useState<string>('hero');
+  const [showChariot, setShowChariot] = useState<boolean>(false);
   
   // Handle scroll-to-section navigation
   useEffect(() => {
@@ -42,7 +43,11 @@ const Index = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id || 'hero');
+          const sectionId = entry.target.id || 'hero';
+          setActiveSection(sectionId);
+          
+          // Only show chariot when in projects section
+          setShowChariot(sectionId === 'projects');
         }
       });
     }, { threshold: 0.3 });
@@ -77,7 +82,7 @@ const Index = () => {
         variants={pageTransition}
       >
         <Hero />
-        <ChariotJourney />
+        {showChariot && <ChariotJourney />}
         <Projects />
         <Skills />
         <About />
