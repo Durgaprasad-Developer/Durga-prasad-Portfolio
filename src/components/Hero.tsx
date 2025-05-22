@@ -148,7 +148,7 @@ const Hero = () => {
           >
             <Button 
               variant="outline"
-              className="hover-trigger hover-link text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
+              className="text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
               onClick={handleScrollToProjects}
             >
               Begin The Journey
