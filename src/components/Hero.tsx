@@ -147,9 +147,8 @@ const Hero = () => {
             className="text-center"
           >
             <Button 
-              variant="outline"
-              className="text-indian-gold text-lg border-2 border-indian-gold px-10 py-6 rounded-full transition duration-300 hover:bg-indian-gold hover:text-indian-royal-blue font-bold tracking-wider"
               onClick={handleScrollToProjects}
+              className="bg-transparent text-white hover:bg-white hover:text-black border-2 border-white px-10 py-6 rounded-full transition-colors duration-300 font-bold tracking-wider text-lg"
             >
               Begin The Journey
             </Button>
