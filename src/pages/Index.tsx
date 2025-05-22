@@ -37,9 +37,10 @@ const Index = () => {
     // Add event listener for hash changes
     window.addEventListener('hashchange', handleHashChange);
     
-    // Set up section detection
+    // Set up section detection with more accurate tracking
     const sections = document.querySelectorAll('section[id]');
     
+    // Create a more sensitive observer for accurate section tracking
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -48,9 +49,16 @@ const Index = () => {
           
           // Only show chariot when in projects section
           setShowChariot(sectionId === 'projects');
+          
+          // Update URL hash without scrolling (only if section is different)
+          if (activeSection !== sectionId) {
+            const url = new URL(window.location.href);
+            url.hash = sectionId;
+            window.history.replaceState({}, '', url.toString());
+          }
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.3, rootMargin: '-10% 0px -10% 0px' });
     
     sections.forEach(section => {
       observer.observe(section);
@@ -60,7 +68,15 @@ const Index = () => {
       window.removeEventListener('hashchange', handleHashChange);
       sections.forEach(section => observer.unobserve(section));
     };
-  }, [lenis]);
+  }, [lenis, activeSection]);
+  
+  // Function to handle navigation dot clicks
+  const handleDotClick = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section && lenis) {
+      lenis.scrollTo(section);
+    }
+  };
   
   const pageTransition = {
     hidden: { opacity: 0 },
@@ -89,16 +105,16 @@ const Index = () => {
         <SideProjects />
         <Footer />
         
-        {/* Navigation dots */}
+        {/* Navigation dots - improved for better visibility and interaction */}
         <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col items-center space-y-4">
           {['hero', 'projects', 'skills', 'about', 'sideprojects'].map((section) => (
-            <a 
+            <button 
               key={section}
-              href={`#${section}`}
+              onClick={() => handleDotClick(section)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 activeSection === section 
-                  ? 'bg-indian-gold w-4 h-4' 
-                  : 'bg-white/30 hover:bg-white/50'
+                  ? 'bg-indian-gold w-4 h-4 scale-125' 
+                  : 'bg-white/30 hover:bg-white/50 hover:scale-110'
               }`}
               aria-label={`Navigate to ${section} section`}
             />
