@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from './ui/button';
+import Header from './Header';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,6 +102,9 @@ const Hero = () => {
     <section ref={heroRef} id="hero" className="section bg-indian-royal-blue min-h-screen relative overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-indian-rich-purple/80 to-indian-royal-blue/90 z-0"></div>
+      
+      {/* Add Header component */}
+      <Header />
       
       {/* Big name in background */}
       <div 
