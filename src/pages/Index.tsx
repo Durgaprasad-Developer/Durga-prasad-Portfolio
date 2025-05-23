@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import Hero from '@/components/Hero';
-import ChariotJourney from '@/components/ChariotJourney';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import About from '@/components/About';
@@ -14,7 +13,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 const Index = () => {
   const lenis = useSmoothScroll();
   const [activeSection, setActiveSection] = useState<string>('hero');
-  const [showChariot, setShowChariot] = useState<boolean>(false);
   const [showNav, setShowNav] = useState<boolean>(false);
   
   // Handle scroll-to-section navigation
@@ -47,9 +45,6 @@ const Index = () => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id || 'hero';
           setActiveSection(sectionId);
-          
-          // Only show chariot when in projects section
-          setShowChariot(sectionId === 'projects');
         }
       });
     }, { threshold: [0.2, 0.5, 0.8], rootMargin: '-10% 0px -10% 0px' });
@@ -101,7 +96,6 @@ const Index = () => {
       >
         <Header />
         <Hero />
-        {showChariot && <ChariotJourney />}
         <Projects />
         <Skills />
         <About />
