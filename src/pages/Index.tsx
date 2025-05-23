@@ -37,78 +37,36 @@ const Index = () => {
     // Add event listener for hash changes
     window.addEventListener('hashchange', handleHashChange);
     
-    // Set up section detection with enhanced observer
+    // Set up section detection with more accurate tracking
     const sections = document.querySelectorAll('section[id]');
     
-    // Create a better observer for accurate section tracking with lower threshold
+    // Create a more sensitive observer for accurate section tracking
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // More aggressive check to detect when a section is in view
-        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+        if (entry.isIntersecting) {
           const sectionId = entry.target.id || 'hero';
-          
-          // Update active section immediately
           setActiveSection(sectionId);
           
           // Only show chariot when in projects section
           setShowChariot(sectionId === 'projects');
           
-          // Update URL hash without scrolling
-          const url = new URL(window.location.href);
-          url.hash = sectionId;
-          window.history.replaceState({}, '', url.toString());
-          
-          console.log('Section changed to:', sectionId); // Debug log
+          // Update URL hash without scrolling (only if section is different)
+          if (activeSection !== sectionId) {
+            const url = new URL(window.location.href);
+            url.hash = sectionId;
+            window.history.replaceState({}, '', url.toString());
+          }
         }
       });
-    }, { 
-      threshold: [0.1, 0.2, 0.3, 0.4, 0.5], // Multiple thresholds for better detection
-      rootMargin: '-5% 0px -5% 0px' // Smaller margin to be more responsive
-    });
+    }, { threshold: 0.3, rootMargin: '-10% 0px -10% 0px' });
     
-    // Observe all sections
     sections.forEach(section => {
       observer.observe(section);
     });
     
-    // Additional scroll listener for more responsive updates
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + (window.innerHeight / 3);
-      
-      // Find the section that's most in view
-      sections.forEach(section => {
-        const sectionElement = section as HTMLElement;
-        const sectionTop = sectionElement.offsetTop;
-        const sectionBottom = sectionTop + sectionElement.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
-          const sectionId = section.id || 'hero';
-          if (activeSection !== sectionId) {
-            setActiveSection(sectionId);
-            setShowChariot(sectionId === 'projects');
-          }
-        }
-      });
-    };
-    
-    // Add scroll event listener with throttling
-    let scrollTimeout: number | null = null;
-    const throttledScrollHandler = () => {
-      if (scrollTimeout === null) {
-        scrollTimeout = window.setTimeout(() => {
-          handleScroll();
-          scrollTimeout = null;
-        }, 100); // 100ms throttle
-      }
-    };
-    
-    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
-    
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
-      window.removeEventListener('scroll', throttledScrollHandler);
       sections.forEach(section => observer.unobserve(section));
-      if (scrollTimeout) window.clearTimeout(scrollTimeout);
     };
   }, [lenis, activeSection]);
   
@@ -147,16 +105,16 @@ const Index = () => {
         <SideProjects />
         <Footer />
         
-        {/* Navigation dots with improved visibility and interaction */}
-        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col items-center space-y-6">
+        {/* Navigation dots - improved for better visibility and interaction */}
+        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col items-center space-y-4">
           {['hero', 'projects', 'skills', 'about', 'sideprojects'].map((section) => (
             <button 
               key={section}
               onClick={() => handleDotClick(section)}
-              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 activeSection === section 
-                  ? 'bg-indian-gold scale-125 shadow-lg shadow-indian-gold/30' 
-                  : 'bg-white/40 hover:bg-white/70 hover:scale-110'
+                  ? 'bg-indian-gold w-4 h-4 scale-125' 
+                  : 'bg-white/30 hover:bg-white/50 hover:scale-110'
               }`}
               aria-label={`Navigate to ${section} section`}
             />
