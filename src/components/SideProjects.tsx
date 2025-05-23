@@ -11,7 +11,7 @@ interface SideProject {
   title: string;
   description: string;
   image: string;
-  link: string; // Added link property to fix TypeScript error
+  link: string;
 }
 
 const sideProjects: SideProject[] = [
@@ -20,21 +20,21 @@ const sideProjects: SideProject[] = [
     title: "Ancient Weapons Collection",
     description: "Curated traditional Indian warfare artifacts and digitized them for historical preservation.",
     image: "/placeholder.svg",
-    link: "#" // Added default link
+    link: "#" 
   },
   {
     id: 2,
     title: "Leadership Academy",
     description: "Founded a program teaching leadership principles derived from ancient Indian kings and warriors.",
     image: "/placeholder.svg",
-    link: "#" // Added default link
+    link: "#"
   },
   {
     id: 3,
     title: "Historical Fiction Novel",
     description: "Authored a novel set in ancient India exploring the lives of royal warriors.",
     image: "/placeholder.svg",
-    link: "#" // Added default link
+    link: "#"
   }
 ];
 
@@ -116,7 +116,7 @@ const SideProjects = () => {
     <section 
       id="side-projects" 
       ref={sectionRef} 
-      className="section bg-gradient-to-b from-indian-royal-blue to-black relative py-20"
+      className="section bg-gradient-to-b from-indian-royal-blue to-black relative py-16 md:py-20"
     >
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -128,17 +128,17 @@ const SideProjects = () => {
         }}></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <h2 
           ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-prata mb-20 text-center text-white"
+          className="text-3xl md:text-4xl lg:text-6xl font-prata mb-12 md:mb-20 text-center text-white"
         >
           Other <span className="text-indian-gold">Conquests</span>
         </h2>
         
         <div 
           ref={projectsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto"
         >
           {sideProjects.map((project) => (
             <motion.div
@@ -153,8 +153,7 @@ const SideProjects = () => {
                 className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden cursor-pointer hover-trigger transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indian-gold/20"
                 onClick={() => openModal(project)}
               >
-                {/* <!-- Insert project thumbnails/videos inside each animated card --> */}
-                <div className="h-48 md:h-60 overflow-hidden relative">
+                <div className="h-40 sm:h-48 md:h-60 overflow-hidden relative">
                   <img 
                     src={project.image} 
                     alt={project.title}
@@ -163,12 +162,12 @@ const SideProjects = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-indian-royal-blue/90 via-indian-royal-blue/30 to-transparent opacity-80"></div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl md:text-2xl font-bold text-indian-gold mb-3">{project.title}</h3>
-                  <p className="text-white/70 mb-4">{project.description}</p>
+                <div className="p-5 md:p-6">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-indian-gold mb-2 md:mb-3">{project.title}</h3>
+                  <p className="text-white/70 mb-4 text-sm md:text-base">{project.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-indian-gold/70">Explore</span>
-                    <svg className="w-6 h-6 text-indian-gold transform transition-transform duration-300 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <span className="text-xs md:text-sm text-indian-gold/70">Explore</span>
+                    <svg className="w-5 h-5 md:w-6 md:h-6 text-indian-gold transform transition-transform duration-300 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </div>
@@ -182,41 +181,41 @@ const SideProjects = () => {
       {/* Modal */}
       {activeProject && (
         <motion.div 
-          className="modal-overlay open"
+          className="modal-overlay open fixed inset-0 z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div 
-            className="modal-content bg-indian-royal-blue border border-indian-gold/30"
+            className="modal-content bg-indian-royal-blue border border-indian-gold/30 w-full max-w-md md:max-w-lg rounded-xl overflow-hidden"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
           >
             <button 
-              className="modal-close text-indian-gold hover:text-white"
+              className="modal-close absolute top-4 right-4 text-indian-gold hover:text-white z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-sm"
               onClick={closeModal}
             >
               &times;
             </button>
             
-            <div className="p-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-indian-gold mb-4">{activeProject.title}</h3>
+            <div className="p-5 md:p-6">
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-indian-gold mb-4">{activeProject.title}</h3>
               
-              <div className="mb-6 rounded-lg overflow-hidden">
+              <div className="mb-5 md:mb-6 rounded-lg overflow-hidden">
                 <img 
                   src={activeProject.image} 
                   alt={activeProject.title}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-40 md:h-64 object-cover"
                 />
               </div>
               
-              <p className="text-white/80 mb-6">{activeProject.description}</p>
+              <p className="text-white/80 mb-6 text-sm md:text-base">{activeProject.description}</p>
               
               <div className="flex justify-end">
                 <a 
                   href={activeProject.link}
-                  className="bg-indian-gold text-indian-royal-blue font-semibold py-2 px-6 rounded-lg hover:bg-white transition duration-300"
+                  className="bg-indian-gold text-indian-royal-blue font-semibold py-2 px-5 md:px-6 rounded-lg hover:bg-white transition duration-300 text-sm md:text-base"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

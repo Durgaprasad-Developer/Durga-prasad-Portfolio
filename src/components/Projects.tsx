@@ -31,17 +31,24 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Real Estate",
-    description: "Developed a platform for virtual tours of historical Indian architecture and monuments.",
+    title: "Other AI Works",
+    description: "Developed various AI initiatives focused on preserving and promoting ancient Indian cultural heritage.",
     image: "/placeholder.svg",
     year: "2021"
   },
   {
     id: 4,
+    title: "Real Estate",
+    description: "Developed a platform for virtual tours of historical Indian architecture and monuments.",
+    image: "/placeholder.svg",
+    year: "2020"
+  },
+  {
+    id: 5,
     title: "Stocks",
     description: "Created an investment strategy platform inspired by ancient Indian trading principles.",
     image: "/placeholder.svg",
-    year: "2020"
+    year: "2019"
   }
 ];
 
@@ -168,7 +175,7 @@ const Projects = () => {
     <section 
       id="projects" 
       ref={sectionRef} 
-      className="section bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple relative py-20"
+      className="section bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple relative py-16 md:py-20"
     >
       {/* Background decorative layer */}
       <div className="absolute inset-0 opacity-10 bg-layer pointer-events-none">
@@ -192,39 +199,44 @@ const Projects = () => {
         
         <h2 
           ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-prata mb-20 text-center text-white"
+          className="text-4xl md:text-5xl lg:text-6xl font-prata mb-12 md:mb-20 text-center text-white"
         >
           Legendary <span className="text-indian-gold">Works</span>
         </h2>
         
         <div ref={timelineRef} className="max-w-5xl mx-auto relative">
-          {/* Timeline path */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indian-gold/30 transform -translate-x-1/2"></div>
+          {/* Timeline path - hide on mobile, show on larger screens */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indian-gold/30 transform -translate-x-1/2 hidden md:block"></div>
+          
+          {/* Mobile indicator for timeline - only visible on mobile */}
+          <div className="w-1/2 mx-auto h-1 bg-indian-gold/30 mb-8 md:hidden"></div>
           
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               ref={el => projectRefs.current[index] = el}
-              className={`project-card mb-24 md:mb-32 bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover-trigger ${
+              className={`project-card mb-12 md:mb-24 lg:mb-32 bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover-trigger ${
                 index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
               }`}
               style={{ 
-                maxWidth: '90%', 
-                width: '600px',
+                maxWidth: '100%',
+                width: index % 2 === 0 ? '94%' : '94%',
+                marginLeft: 'auto',
+                marginRight: 'auto',
                 transformStyle: 'preserve-3d'
               }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true, margin: "-100px" }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 * index }}
+              viewport={{ once: true, margin: "-50px" }}
               onMouseMove={(e) => handleTilt(e, index)}
               onMouseLeave={() => resetTilt(index)}
             >
-              <div className="relative h-64 md:h-80 overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="relative h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-center transform transition-transform duration-700 hover:scale-110"
+                  className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-110"
                   style={{ transform: 'translateZ(20px)' }}
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-indian-royal-blue/90 to-transparent"></div>
@@ -233,10 +245,10 @@ const Projects = () => {
                 </div>
               </div>
               
-              <div className="p-6 md:p-8" style={{ transform: 'translateZ(30px)' }}>
-                <h3 className="text-2xl md:text-3xl font-prata mb-4 text-indian-gold">{project.title}</h3>
-                <p className="text-white/80 mb-6">{project.description}</p>
-                <button className="text-indian-gold border border-indian-gold px-6 py-2 rounded-full hover:bg-indian-gold hover:text-indian-royal-blue transition duration-300">
+              <div className="p-5 md:p-6 lg:p-8" style={{ transform: 'translateZ(30px)' }}>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-prata mb-3 md:mb-4 text-indian-gold">{project.title}</h3>
+                <p className="text-white/80 mb-4 md:mb-6 text-sm sm:text-base">{project.description}</p>
+                <button className="text-indian-gold border border-indian-gold px-4 py-1.5 sm:px-6 sm:py-2 rounded-full hover:bg-indian-gold hover:text-indian-royal-blue transition duration-300 text-sm sm:text-base">
                   Explore
                 </button>
               </div>
