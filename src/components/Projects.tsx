@@ -59,9 +59,9 @@ const Projects = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
   
-  // Tilt effect function
+  // Enhanced tilt effect with smoother animations
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
-    if (!projectRefs.current[index]) return;
+    if (!projectRefs.current[index] || window.innerWidth < 768) return;
     
     const card = projectRefs.current[index];
     const rect = card.getBoundingClientRect();
@@ -71,27 +71,27 @@ const Projects = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const tiltX = (centerY - y) / 10;
-    const tiltY = (x - centerX) / 10;
+    const tiltX = (centerY - y) / 15;
+    const tiltY = (x - centerX) / 15;
     
     gsap.to(card, {
       rotateX: tiltX,
       rotateY: tiltY,
-      duration: 0.5,
+      duration: 0.4,
       ease: 'power2.out',
-      transformPerspective: 900,
+      transformPerspective: 1000,
       transformStyle: 'preserve-3d'
     });
   };
   
-  // Reset tilt
+  // Reset tilt with smoother transition
   const resetTilt = (index: number) => {
     if (!projectRefs.current[index]) return;
     
     gsap.to(projectRefs.current[index], {
       rotateX: 0,
       rotateY: 0,
-      duration: 0.5,
+      duration: 0.6,
       ease: 'power2.out'
     });
   };
@@ -99,72 +99,77 @@ const Projects = () => {
   useEffect(() => {
     if (!sectionRef.current || !timelineRef.current || !headingRef.current || !sectionTitleRef.current) return;
     
-    // Animate section title
+    // Enhanced section title animation
     gsap.fromTo(sectionTitleRef.current,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionTitleRef.current,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+    
+    // Enhanced heading animation
+    gsap.fromTo(headingRef.current,
       { y: 50, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        scrollTrigger: {
-          trigger: sectionTitleRef.current,
-          start: 'top bottom-=50',
-          end: 'bottom bottom-=100',
-          scrub: 1,
-        }
-      }
-    );
-    
-    // Animate heading
-    gsap.fromTo(headingRef.current,
-      { y: 100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
+        duration: 1,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: headingRef.current,
-          start: 'top bottom-=100',
-          end: 'bottom bottom-=200',
-          scrub: 1,
+          start: 'top bottom-=150',
+          toggleActions: 'play none none reverse'
         }
       }
     );
     
-    // Timeline animation
+    // Enhanced timeline animation for each card
     projectRefs.current.forEach((card, index) => {
       if (!card) return;
       
       gsap.fromTo(card,
         { 
-          x: index % 2 === 0 ? -100 : 100, 
+          y: 80,
           opacity: 0,
-          rotateY: index % 2 === 0 ? 5 : -5
+          scale: 0.9
         },
         {
-          x: 0,
+          y: 0,
           opacity: 1,
-          rotateY: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
             start: 'top bottom-=100',
-            end: 'center center',
-            scrub: 1,
-          }
+            toggleActions: 'play none none reverse'
+          },
+          delay: index * 0.15
         }
       );
     });
     
-    // Parallax background effect
+    // Enhanced parallax background effect
     const bgLayer = sectionRef.current.querySelector('.bg-layer');
     if (bgLayer) {
       gsap.fromTo(bgLayer,
-        { y: '-10%' },
+        { y: '-5%' },
         {
-          y: '10%',
+          y: '5%',
+          ease: 'none',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true,
+            scrub: 1.5,
           }
         }
       );
@@ -175,11 +180,10 @@ const Projects = () => {
     <section 
       id="projects" 
       ref={sectionRef} 
-      className="section bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple relative py-16 md:py-20"
+      className="section bg-gradient-to-b from-indian-royal-blue to-indian-rich-purple relative py-20 md:py-28 lg:py-32"
     >
-      {/* Background decorative layer */}
-      <div className="absolute inset-0 opacity-10 bg-layer pointer-events-none">
-        {/* <!-- Replace background with Indian temple carvings / Mahabharata scenes --> */}
+      {/* Enhanced background decorative layer */}
+      <div className="absolute inset-0 opacity-5 bg-layer pointer-events-none">
         <div className="absolute inset-0" style={{ 
           backgroundImage: "url('/placeholder.svg')",
           backgroundSize: 'cover',
@@ -189,74 +193,99 @@ const Projects = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section title */}
-        <h2 
+        {/* Enhanced section title */}
+        <motion.h2 
           ref={sectionTitleRef}
-          className="text-2xl md:text-3xl font-prata mb-4 text-center text-white"
+          className="text-2xl md:text-3xl lg:text-4xl font-prata mb-6 text-center text-white"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
           <span className="text-indian-gold">My</span> Journey
-        </h2>
+        </motion.h2>
         
-        <h2 
+        <motion.h2 
           ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-prata mb-12 md:mb-20 text-center text-white"
+          className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-prata mb-16 md:mb-24 lg:mb-28 text-center text-white leading-tight"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
         >
           Legendary <span className="text-indian-gold">Works</span>
-        </h2>
+        </motion.h2>
         
-        <div ref={timelineRef} className="max-w-5xl mx-auto relative">
-          {/* Timeline path - hide on mobile, show on larger screens */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-indian-gold/30 transform -translate-x-1/2 hidden md:block"></div>
+        <div ref={timelineRef} className="max-w-7xl mx-auto relative">
+          {/* Enhanced timeline path */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indian-gold/40 via-indian-gold/60 to-indian-gold/40 transform -translate-x-1/2 hidden lg:block"></div>
           
-          {/* Mobile indicator for timeline - only visible on mobile */}
-          <div className="w-1/2 mx-auto h-1 bg-indian-gold/30 mb-8 md:hidden"></div>
+          {/* Enhanced mobile indicator */}
+          <div className="w-3/4 mx-auto h-0.5 bg-gradient-to-r from-transparent via-indian-gold/50 to-transparent mb-12 lg:hidden"></div>
           
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               ref={el => projectRefs.current[index] = el}
-              className={`project-card mb-12 md:mb-24 lg:mb-32 bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover-trigger ${
-                index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
+              className={`project-card mb-16 md:mb-20 lg:mb-28 bg-white/8 backdrop-blur-lg rounded-2xl overflow-hidden shadow-2xl hover:shadow-indian-gold/20 transition-all duration-500 group ${
+                index % 2 === 0 
+                  ? 'lg:ml-0 lg:mr-auto lg:translate-x-0' 
+                  : 'lg:ml-auto lg:mr-0 lg:translate-x-0'
               }`}
               style={{ 
                 maxWidth: '100%',
-                width: index % 2 === 0 ? '94%' : '94%',
-                marginLeft: 'auto',
-                marginRight: 'auto',
+                width: '100%',
                 transformStyle: 'preserve-3d'
               }}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, delay: 0.1 * index }}
+              viewport={{ once: true, margin: "-100px" }}
               onMouseMove={(e) => handleTilt(e, index)}
               onMouseLeave={() => resetTilt(index)}
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="relative h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-110"
-                  style={{ transform: 'translateZ(20px)' }}
-                />
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-indian-royal-blue/90 to-transparent"></div>
-                <div className="absolute top-4 right-4 bg-indian-gold text-indian-royal-blue font-bold py-1 px-4 rounded-full text-sm" style={{ transform: 'translateZ(40px)' }}>
-                  {project.year}
+              <div className="lg:flex lg:items-center lg:min-h-[400px]">
+                {/* Image container with enhanced styling */}
+                <div className={`relative lg:w-1/2 h-64 sm:h-72 lg:h-96 overflow-hidden ${
+                  index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'
+                }`} style={{ transformStyle: 'preserve-3d' }}>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center transform transition-all duration-700 group-hover:scale-110"
+                    style={{ transform: 'translateZ(20px)' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-indian-royal-blue/80 via-transparent to-transparent"></div>
+                  <div className="absolute top-6 right-6 bg-indian-gold text-indian-royal-blue font-bold py-2 px-6 rounded-full text-lg lg:text-xl shadow-lg" style={{ transform: 'translateZ(40px)' }}>
+                    {project.year}
+                  </div>
+                </div>
+                
+                {/* Content container with enhanced styling */}
+                <div className={`lg:w-1/2 p-8 lg:p-12 xl:p-16 ${
+                  index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'
+                }`} style={{ transform: 'translateZ(30px)' }}>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-prata mb-6 lg:mb-8 text-indian-gold leading-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-white/90 mb-8 lg:mb-10 text-base lg:text-lg xl:text-xl leading-relaxed">
+                    {project.description}
+                  </p>
+                  <motion.button 
+                    className="text-indian-gold border-2 border-indian-gold px-8 py-3 lg:px-10 lg:py-4 rounded-full hover:bg-indian-gold hover:text-indian-royal-blue transition-all duration-300 text-base lg:text-lg font-medium shadow-lg hover:shadow-indian-gold/30"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Explore
+                  </motion.button>
                 </div>
               </div>
               
-              <div className="p-5 md:p-6 lg:p-8" style={{ transform: 'translateZ(30px)' }}>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-prata mb-3 md:mb-4 text-indian-gold">{project.title}</h3>
-                <p className="text-white/80 mb-4 md:mb-6 text-sm sm:text-base">{project.description}</p>
-                <button className="text-indian-gold border border-indian-gold px-4 py-1.5 sm:px-6 sm:py-2 rounded-full hover:bg-indian-gold hover:text-indian-royal-blue transition duration-300 text-sm sm:text-base">
-                  Explore
-                </button>
-              </div>
-              
-              {/* Timeline dot */}
-              <div className={`hidden md:block absolute top-1/2 ${
-                index % 2 === 0 ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'
-              } w-4 h-4 rounded-full bg-indian-gold transform -translate-y-1/2 mx-8`}></div>
+              {/* Enhanced timeline dot */}
+              <div className={`hidden lg:block absolute top-1/2 ${
+                index % 2 === 0 ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'
+              } w-6 h-6 rounded-full bg-indian-gold transform -translate-y-1/2 shadow-lg shadow-indian-gold/50 border-4 border-indian-royal-blue`}></div>
             </motion.div>
           ))}
         </div>
