@@ -69,7 +69,7 @@ const Footer = () => {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-prata text-indian-gold mb-6"
             >
-              Connect with the Kingdom
+              Lets Connect
             </motion.h2>
             
             <motion.p
@@ -79,7 +79,7 @@ const Footer = () => {
               viewport={{ once: true }}
               className="text-white/70 max-w-xl mx-auto"
             >
-              Follow the royal journey through the digital realms and stay updated with the latest conquests.
+              Follow the journey through the digital realms and stay updated with the latest conquests.
             </motion.p>
           </div>
           
@@ -90,7 +90,7 @@ const Footer = () => {
           >
             {/* <!-- Insert your social profile links and replace icon images --> */}
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/durga-prasad-reddy-a151382a0/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-icon hover-trigger group"
@@ -101,7 +101,7 @@ const Footer = () => {
             </a>
             
             <a 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/____neon__9/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-icon hover-trigger group"
@@ -112,7 +112,7 @@ const Footer = () => {
             </a>
             
             <a 
-              href="https://youtube.com" 
+              href="https://www.youtube.com/@durgaprasadBuilds" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-icon hover-trigger group"
@@ -143,7 +143,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="mt-16 pt-8 border-t border-white/10 text-center">
             <p className="text-white/40 text-sm">
-              © {new Date().getFullYear()} Ancient Indian Kings. All rights reserved.
+              © {new Date().getFullYear()} Durga prasad. All rights reserved.
             </p>
           </div>
         </div>

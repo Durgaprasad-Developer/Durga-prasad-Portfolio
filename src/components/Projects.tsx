@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -217,11 +217,7 @@ const Projects = () => {
         </motion.h2>
         
         <div ref={timelineRef} className="max-w-7xl mx-auto relative">
-          {/* Enhanced timeline path */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indian-gold/40 via-indian-gold/60 to-indian-gold/40 transform -translate-x-1/2 hidden lg:block"></div>
           
-          {/* Enhanced mobile indicator */}
-          <div className="w-3/4 mx-auto h-0.5 bg-gradient-to-r from-transparent via-indian-gold/50 to-transparent mb-12 lg:hidden"></div>
           
           {projects.map((project, index) => (
             <motion.div
@@ -257,9 +253,6 @@ const Projects = () => {
                     style={{ transform: 'translateZ(20px)' }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-indian-royal-blue/80 via-transparent to-transparent"></div>
-                  <div className="absolute top-6 right-6 bg-indian-gold text-indian-royal-blue font-bold py-2 px-6 rounded-full text-lg lg:text-xl shadow-lg" style={{ transform: 'translateZ(40px)' }}>
-                    {project.year}
-                  </div>
                 </div>
                 
                 {/* Content container with enhanced styling */}
@@ -277,7 +270,10 @@ const Projects = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
+                    
                     Explore
+                    
+                    
                   </motion.button>
                 </div>
               </div>
