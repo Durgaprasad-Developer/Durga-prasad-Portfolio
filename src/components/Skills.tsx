@@ -15,34 +15,34 @@ interface Skill {
 
 const skills: Skill[] = [
   {
-    name: "React",
-    level: 90,
+    name: "AI",
+    level: 100,
     icon: "/placeholder.svg", // Will be replaced with skill icon
-    description: "Mastery of modern React, including hooks, context, and advanced patterns"
+    description: "Mastery in AI technologies and Building with AI"
   },
   {
-    name: "JavaScript",
-    level: 85,
-    icon: "/placeholder.svg", // Will be replaced with skill icon
-    description: "Extensive knowledge of ES6+ features and asynchronous programming"
-  },
-  {
-    name: "TypeScript",
+    name: "React js, ts",
     level: 80,
     icon: "/placeholder.svg", // Will be replaced with skill icon
-    description: "Strong typing skills with advanced type system knowledge"
+    description: "Building interactive UIs with React"
   },
   {
     name: "Node.js",
-    level: 75,
+    level: 60,
     icon: "/placeholder.svg", // Will be replaced with skill icon
     description: "Backend development with Express and various frameworks"
   },
   {
-    name: "UI/UX Design",
+    name: "SQL",
     level: 70, 
     icon: "/placeholder.svg", // Will be replaced with skill icon
-    description: "Creating intuitive and beautiful user interfaces"
+    description: "Database management and query optimization"
+  },
+  {
+    name: "Investment",
+    level: 80, 
+    icon: "/placeholder.svg", // Will be replaced with skill icon
+    description: "Financial analysis and investment strategies"
   },
 ];
 

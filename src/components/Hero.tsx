@@ -123,7 +123,7 @@ const Hero = () => {
       >
         <div className="absolute inset-0 bg-black/40"></div>
         <img 
-          src="/lovable-uploads/fe8db7ff-71e0-4122-9a79-7d85b3ba394f.png" 
+          src="./lovable-uploads/king.png" 
           alt="King with crown" 
           className="w-full h-full object-cover object-center"
         />

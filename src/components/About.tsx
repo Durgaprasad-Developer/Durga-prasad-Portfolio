@@ -94,7 +94,7 @@ const About = () => {
           {/* Content */}
           <div ref={contentRef} className="text-white">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-prata mb-6 text-indian-gold">
-              Our <span className="text-white">Story</span>
+              My <span className="text-white">Story</span>
             </h2>
             <p className="text-lg mb-6 opacity-80">
               We are a team of historians and tech enthusiasts dedicated to bringing the rich history of ancient Indian kings to life through immersive digital experiences.
@@ -113,7 +113,7 @@ const About = () => {
           <div ref={imageRef} className="relative overflow-hidden rounded-xl shadow-xl">
             {/* Replace with an image of ancient Indian kings or artifacts */}
             <img 
-              src="/placeholder.svg" 
+              src="./lovable-uploads/YouTube.png" 
               alt="Ancient Indian Kings" 
               className="w-full h-auto object-cover" 
             />
