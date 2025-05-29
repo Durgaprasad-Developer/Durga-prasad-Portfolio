@@ -11,7 +11,8 @@ interface Project {
   title: string;
   description: string;
   image: string;
-  year: string;
+  linkPath: string;
+  btnName: string;
 }
 
 const projects: Project[] = [
@@ -19,36 +20,41 @@ const projects: Project[] = [
     id: 1,
     title: "AI Avatars",
     description: "Created an AI-powered avatar generator that transforms photos into ancient Indian warrior styles.",
-    image: "/placeholder.svg",
-    year: "2023"
+    image: "./lovable-uploads/AIAvatar.png",
+    linkPath: "https://www.instagram.com/nextai_bro/",
+    btnName: "Explore AI Avatars"
   },
   {
     id: 2,
     title: "YouTube Channel",
     description: "Launched an educational channel teaching ancient Indian history and warrior techniques.",
-    image: "/placeholder.svg",
-    year: "2022"
+    image: "./lovable-uploads/YouTube.png",
+    linkPath: "https://www.youtube.com/@durgaprasadBuilds",
+    btnName: "Visit YouTube Channel"
   },
   {
     id: 3,
     title: "Other AI Works",
     description: "Developed various AI initiatives focused on preserving and promoting ancient Indian cultural heritage.",
-    image: "/placeholder.svg",
-    year: "2021"
+    image: "./lovable-uploads/otherAI2.png",
+    linkPath: "https://www.linkedin.com/in/durga-prasad-reddy-a151382a0/",
+    btnName: "Explore AI Projects"
   },
   {
     id: 4,
     title: "Real Estate",
     description: "Developed a platform for virtual tours of historical Indian architecture and monuments.",
-    image: "/placeholder.svg",
-    year: "2020"
+    image: "./lovable-uploads/RealEstate.png",
+    linkPath: "https://www.youtube.com/@durgaprasadBuilds",
+    btnName: "Explore Real Estate"
   },
   {
     id: 5,
     title: "Stocks",
     description: "Created an investment strategy platform inspired by ancient Indian trading principles.",
-    image: "/placeholder.svg",
-    year: "2019"
+    image: "./lovable-uploads/Stocks.png",
+    linkPath: "https://www.youtube.com/@durgaprasadBuilds",
+    btnName: "Explore Stock Strategies"
   }
 ];
 
@@ -220,6 +226,7 @@ const Projects = () => {
           
           
           {projects.map((project, index) => (
+            <a href={project.linkPath}>
             <motion.div
               key={project.id}
               ref={el => projectRefs.current[index] = el}
@@ -241,6 +248,7 @@ const Projects = () => {
               onMouseLeave={() => resetTilt(index)}
               whileHover={{ scale: 1.02 }}
             >
+              
               <div className="lg:flex lg:items-center lg:min-h-[400px]">
                 {/* Image container with enhanced styling */}
                 <div className={`relative lg:w-1/2 h-64 sm:h-72 lg:h-96 overflow-hidden ${
@@ -265,24 +273,28 @@ const Projects = () => {
                   <p className="text-white/90 mb-8 lg:mb-10 text-base lg:text-lg xl:text-xl leading-relaxed">
                     {project.description}
                   </p>
+                  <a href={project.linkPath}>
                   <motion.button 
                     className="text-indian-gold border-2 border-indian-gold px-8 py-3 lg:px-10 lg:py-4 rounded-full hover:bg-indian-gold hover:text-indian-royal-blue transition-all duration-300 text-base lg:text-lg font-medium shadow-lg hover:shadow-indian-gold/30"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     
-                    Explore
+                    {project.btnName}
                     
                     
                   </motion.button>
+                  </a>
                 </div>
               </div>
+              
               
               {/* Enhanced timeline dot */}
               <div className={`hidden lg:block absolute top-1/2 ${
                 index % 2 === 0 ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'
               } w-6 h-6 rounded-full bg-indian-gold transform -translate-y-1/2 shadow-lg shadow-indian-gold/50 border-4 border-indian-royal-blue`}></div>
             </motion.div>
+            </a>
           ))}
         </div>
       </div>
