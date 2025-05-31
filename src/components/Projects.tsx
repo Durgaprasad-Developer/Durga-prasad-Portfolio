@@ -53,7 +53,7 @@ const projects: Project[] = [
     title: "Stocks",
     description: "Investing with strategy and research with AI focusing on long-term growth.",
     image: "./lovable-uploads/Stocks.png",
-    linkPath: "https://www.youtube.com/@durgaprasadBuilds",
+    linkPath: "https://youtu.be/ZRfqU3a2nwk?si=o9D1oo9K_sptXJi3",
     btnName: "How Investment using AI"
   }
 ];
