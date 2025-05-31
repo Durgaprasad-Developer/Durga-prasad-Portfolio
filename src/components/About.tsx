@@ -97,15 +97,25 @@ const About = () => {
               My <span className="text-white">Story</span>
             </h2>
             <p className="text-lg mb-6 opacity-80">
-              We are a team of historians and tech enthusiasts dedicated to bringing the rich history of ancient Indian kings to life through immersive digital experiences.
+              My journey began in 8th grade, not with textbooks — but with business.
+
+From trying out investments, trading, and selling courses, I was always looking to build, create, and earn. I entered content creation, sharing what I knew and learning publicly. This opened doors to hackathons, where I turned ideas into prototypes and dreams into code.
+
+Then came real estate — my family's livelihood. Working alongside my father, I saw the challenges brokers and builders face. That’s when I realized: tech could be the bridge.
+
             </p>
             <p className="text-lg mb-6 opacity-80">
-              Our mission is to educate and inspire future generations by showcasing the valor, wisdom, and cultural achievements of these legendary figures.
+              Now, I’m focused on:
+
+Learning more about real estate
+
             </p>
             <ul className="list-disc pl-5 opacity-80">
-              <li>Interactive historical timelines</li>
-              <li>3D models of ancient monuments</li>
-              <li>Augmented reality experiences</li>
+              <li>Earning — because financial freedom isn’t optional anymore</li>
+              <li>Using technology to bridge the gaps in traditional industries</li>
+              <li>AI to replace manual tasks — from content automation to customer interaction</li>
+              <li>Web development — building with React, Tailwind, and backend tools</li>
+              <li>AI tools — not just consuming, but creating with them</li>
             </ul>
           </div>
           
