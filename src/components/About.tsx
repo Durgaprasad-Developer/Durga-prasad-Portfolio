@@ -97,25 +97,16 @@ const About = () => {
               My <span className="text-white">Story</span>
             </h2>
             <p className="text-lg mb-6 opacity-80">
-              My journey began in 8th grade, not with textbooks — but with business.
-
-From trying out investments, trading, and selling courses, I was always looking to build, create, and earn. I entered content creation, sharing what I knew and learning publicly. This opened doors to hackathons, where I turned ideas into prototypes and dreams into code.
-
-Then came real estate — my family's livelihood. Working alongside my father, I saw the challenges brokers and builders face. That’s when I realized: tech could be the bridge.
+              My journey began in 8th grade — selling, trading, learning. I moved from online businesses to content creation, then to hackathons, real estate, and now AI. I don’t just use tools — I build with them. I’m on a mission to bridge gaps in real estate and content with the power of tech.
 
             </p>
             <p className="text-lg mb-6 opacity-80">
               Now, I’m focused on:
-
-Learning more about real estate
-
             </p>
             <ul className="list-disc pl-5 opacity-80">
-              <li>Earning — because financial freedom isn’t optional anymore</li>
-              <li>Using technology to bridge the gaps in traditional industries</li>
-              <li>AI to replace manual tasks — from content automation to customer interaction</li>
-              <li>Web development — building with React, Tailwind, and backend tools</li>
-              <li>AI tools — not just consuming, but creating with them</li>
+              <li>Real Estate + Tech: Learning the gaps in India’s property market and building AI-powered tools to fix them.</li>
+              <li>AI Creation & Automation: Using AI to automate content, build tools, and create scalable systems — starting with my service, NextAI.</li>
+              <li>Earning + Mastery: Gaining financial strength through internships, investing, and projects — all while mastering DSA, systems, and real-world problem solving.</li>
             </ul>
           </div>
           
