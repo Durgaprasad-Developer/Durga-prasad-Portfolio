@@ -17,22 +17,22 @@ interface SideProject {
 const sideProjects: SideProject[] = [
   {
     id: 1,
-    title: "Ancient Weapons Collection",
-    description: "Curated traditional Indian warfare artifacts and digitized them for historical preservation.",
-    image: "/placeholder.svg",
-    link: "#" 
+    title: "Next Thumbnail AI",
+    description: `This project was a part of my Learning journey, Where I Built a tool which gives you Thumbnail with prompts using Flux AI and lora training. \n (Note : This was my past project and requires to upgrade plan so it might not work now.)`,
+    image: "./lovable-uploads/NextThumbnail AI.png",
+    link: "https://next-thumbnail-ai.vercel.app/" 
   },
   {
     id: 2,
-    title: "Leadership Academy",
-    description: "Founded a program teaching leadership principles derived from ancient Indian kings and warriors.",
-    image: "/placeholder.svg",
-    link: "#"
+    title: "TradingPro",
+    description: "This my first Semister project, Where I built a trading website with html, css and javascript. It has features like Chart, Indicator(now it may not work))",
+    image: "./lovable-uploads/TradingPro1.png",
+    link: "https://durgaprasad-developer.github.io/trading/"
   },
   {
     id: 3,
-    title: "Historical Fiction Novel",
-    description: "Authored a novel set in ancient India exploring the lives of royal warriors.",
+    title: "Yet to add",
+    description: "",
     image: "/placeholder.svg",
     link: "#"
   }

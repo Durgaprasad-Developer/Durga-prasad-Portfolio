@@ -151,7 +151,7 @@ const Skills = () => {
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5 bg-pattern pointer-events-none">
         <div className="absolute inset-0" style={{ 
-          backgroundImage: "url('/placeholder.svg')",
+          backgroundImage: "url('./lovable-uploads/skills.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'

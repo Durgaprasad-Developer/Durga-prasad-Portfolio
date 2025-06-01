@@ -45,7 +45,7 @@ const projects: Project[] = [
     title: "Real Estate",
     description: "Steped into Real Estate with a unique approach, leveraging AI and automation.",
     image: "./lovable-uploads/RealEstate.png",
-    linkPath: "https://www.youtube.com/@durgaprasadBuilds",
+    linkPath: "https://www.linkedin.com/posts/durga-prasad-reddy-a151382a0_what-the-best-real-estate-developers-consider-activity-7333343844110913537-uDHp?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEiierEBy9zFVJKYaF8IjNxVoBdJvE7bXu0",
     btnName: "Explore Real Estate opportunities"
   },
   {
@@ -191,7 +191,7 @@ const Projects = () => {
       {/* Enhanced background decorative layer */}
       <div className="absolute inset-0 opacity-5 bg-layer pointer-events-none">
         <div className="absolute inset-0" style={{ 
-          backgroundImage: "url('/placeholder.svg')",
+          backgroundImage: "url('./lovable-uploads/LegendaryworksBackgorund.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'

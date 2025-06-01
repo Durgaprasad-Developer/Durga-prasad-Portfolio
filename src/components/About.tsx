@@ -82,7 +82,7 @@ const About = () => {
       <div className="absolute inset-0 opacity-10 bg-layer pointer-events-none">
         {/* Replace background with ancient Indian patterns */}
         <div className="absolute inset-0" style={{ 
-          backgroundImage: "url('/placeholder.svg')",
+          backgroundImage: "url('./lovable-uploads/om.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'

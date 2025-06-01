@@ -12,7 +12,7 @@ const Header = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
     { name: 'About', href: '#about' },
-    { name: 'Side Projects', href: '#sideprojects' }
+    { name: 'Side Projects', href: '#side-projects' }
   ];
 
   // Handle scroll event to change header style when scrolled
